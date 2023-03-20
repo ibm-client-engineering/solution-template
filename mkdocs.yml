@@ -23,12 +23,17 @@ theme:
       bug: octicons/bug-16
       example: octicons/beaker-16
       quote: octicons/quote-16
+  custom_dir: docs/overrides
+  logo: assets/images/ibm.png
+
+extra:
+  generator: false
 
 
 extra_css:
-  - assets/extra.css
+  - overrides/custom.css
 
-
+repo_url: https://github.com/ibm-client-engineering/solution-template/
 
 markdown_extensions:
   - toc:

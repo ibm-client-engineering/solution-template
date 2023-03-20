@@ -1,0 +1,3 @@
+@import '~@carbon/colors/css/colors.css';
+@import '~@carbon/grid/css/grid.css';
+@import '~@carbon/type/css/type.css';
