@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+id: hello
+title: Hello, World !
 ---
 
 # Manage Docs Versions

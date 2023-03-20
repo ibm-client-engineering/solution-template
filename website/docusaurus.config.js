@@ -65,18 +65,21 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'My Site',
+        title: '| My Solution',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
+          srcDark: 'img/logo-dark.svg',
+          width: 200,
+          height: 200,
         },
         items: [
-          {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Tutorial',
-          },
+          // {
+          //   type: 'doc',
+          //   docId: 'intro',
+          //   position: 'left',
+          //   label: 'Section',
+          // },
 
           {
             href: 'https://github.com/facebook/docusaurus',
@@ -127,8 +130,7 @@ const config = {
               },
             ],
           },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        ]
       },
       prism: {
         theme: lightCodeTheme,
