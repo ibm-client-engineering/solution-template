@@ -78,7 +78,9 @@
     --ifm-menu-link-padding-vertical: 0.4rem;
     /* --ifm-menu-link-padding-horizontal: 2rem; */
     --ifm-pagination-nav-border-radius: 0rem;
-
+    --ifm-alert-border-radius: 0rem;
+    --ifm-alert-background-color: #82b1ff;
+    --ifm-alert-border-color: #82b1ff;
     --ifm-card-border-radius: 0;
 
     --color-section-number: #e8e8e8;
@@ -86,7 +88,7 @@
 
 
 
-    --ifm-h1-font-size: 3.5em
+    --ifm-h1-font-size: 3.0em
 }
 
 .docusaurus-highlight-code-line {
