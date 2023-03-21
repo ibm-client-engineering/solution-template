@@ -9,7 +9,7 @@ slug: /
 
 ## Introduction
 
-# Business Requirements
+## Business Requirements
 
 This section should detail the customer's business needs and requirements, including any constraints or limitations.
 
@@ -27,4 +27,4 @@ This section should detail the customer's business needs and requirements, inclu
 
 ## Testing
 
-# Architecture Decisions
+## Architecture Decisions
