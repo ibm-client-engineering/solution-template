@@ -82,7 +82,7 @@ const config = {
           // },
 
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'repo-url',
             label: 'GitHub',
             position: 'right',
           },
