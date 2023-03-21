@@ -6,23 +6,30 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Welcome',
-  tagline: 'Dinosaurs are cool',
+
+  title: 'IBM Client Engineering',
+  tagline: 'Build Faster. Together.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://githubprojectname/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
+  organizationName: 'ibm-client-engineering', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
+
+  // ...
+  plugins: [require.resolve("@cmfcmf/docusaurus-search-local")],
+
+  // or, if you want to specify options
+
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -40,13 +47,6 @@ const config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        blog: {
-          showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -83,13 +83,13 @@ const config = {
 
           {
             href: 'repo-url',
-            label: 'GitHub',
+            className: "header-github-link",
             position: 'right',
           },
         ],
       },
       footer: {
-        style: 'dark',
+        // style: 'dark',
         links: [
           {
             title: 'Links',
@@ -115,3 +115,5 @@ const config = {
 };
 
 module.exports = config;
+
+
