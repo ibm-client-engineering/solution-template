@@ -1,10 +1,10 @@
 ---
-id: overview
-sidebar_position: 1
-title: Solution Overview
+id: define
+sidebar_position: 2
+title: Define
 ---
 
-## Vision & Business Alignment
+## Vision
 This section establishes the strategic foundation for the project
 
 ### Purpose
@@ -13,5 +13,5 @@ This section establishes the strategic foundation for the project
 
 ### Target Outcomes & Success Metrics
 
-### Scope &  Roadmap
+### Scope & Roadmap
 
