@@ -16,9 +16,10 @@ graph LR;
     C --> D(Manage);
 ```
 
-**"Flight Path":** This is a living document for an adoption journey that synthesizes the best practices from IBM when implementing **`solution`**.
+#### Flight Path
+This is a living document for an adoption journey that synthesizes the best practices from IBM when considering and implementing **`solution`**
 
-The Flight Path approach has its foundation in IBM Client Engineering's commitment to transparency and openness, exemplified by the maintenance of an accessible solution library founded on real-life customer experiences as captured in this repository. This approach aims to document user-friendly and adaptable landing zones to guide and promote adoption of IBM Technology with an emphasis on innovation, scalability, user experience."
+The Flight Path approach has its foundation in IBM Client Engineering's commitment to transparency and openness, exemplified by the maintenance of an accessible solution library founded on real-life customer experiences as captured in this repository. This approach aims to document user-friendly and adaptable landing zones to guide and promote adoption of IBM Technology with an emphasis on innovation, scalability, user experience.
 
 :::info
 
