@@ -11,7 +11,7 @@ const config = {
   },
   themes: ['@docusaurus/theme-mermaid'],
   themeConfig: {
-    metadata: [{name: 'keywords', content: 'ibm client engineering, <solution>'}],
+    metadata: [{name: 'keywords', content: 'ibm client engineering, open solutions library,  <solution>'}],
     mermaid: {
       theme: { light: 'neutral', dark: 'forest' },
     },
