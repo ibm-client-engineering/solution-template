@@ -6,21 +6,24 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   title: 'IBM Client Engineering',
   tagline: 'Build Faster. Together.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://githubprojectname/',
+  url: 'https://ibm-client-engineering.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/projectname/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'ibm-client-engineering', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  projectName: 'project-name', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -50,7 +53,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/ibm-client-engineering/solution-filenet-aws/tree/main/packages/create-docusaurus/templates/shared/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -62,10 +65,18 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [{name: 'keywords', content: 'ibm client engineering, open solutions library,  filenet, eks, aws, cp4ba, filenet on aws eks'}],
+      mermaid: {
+        theme: { light: 'neutral', dark: 'dark' },
+      },
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 5,
+      },
       navbar: {
-        title: '| My Solution',
+        title: '| IBM FileNet on AWS EKS',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
@@ -82,7 +93,7 @@ const config = {
           // },
 
           {
-            href: 'repo-url',
+            href: 'https://github.com/ibm-client-engineering/solution-filenet-aws',
             className: "header-github-link",
             position: 'right',
           },

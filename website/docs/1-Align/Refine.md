@@ -1,7 +1,7 @@
 ---
-id: approach
-sidebar_position: 2
-title: User-Centric Approach
+id: refine
+sidebar_position: 3
+title: Refine
 ---
 
 # Design Thinking
