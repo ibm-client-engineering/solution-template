@@ -21,13 +21,13 @@ const vars = {
 module.exports = { vars };
 EOF
 
-echo Update Packages
+cd website
+
+echo Updating Packages
 npm i
 npm update
 
 echo Building local site for testing
-
-cd website
 yarn build
 
 echo Launching site
