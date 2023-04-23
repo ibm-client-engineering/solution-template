@@ -22,9 +22,13 @@ module.exports = { vars };
 EOF
 
 echo Update Packages
+npm i
 npm update
 
 echo Building local site for testing
 
 cd website
 yarn build
+
+echo Launching site
+npm run serve
