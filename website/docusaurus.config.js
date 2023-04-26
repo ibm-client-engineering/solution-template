@@ -14,7 +14,7 @@ const config = {
   title: 'IBM Client Engineering',
   tagline: 'Build Faster. Together.',
   favicon: 'img/favicon.ico',
-
+  deploymentBranch: 'gh-pages',
   // Set the production url of your site here
   url: vars.url,
   // Set the /<baseUrl>/ pathname under which your site is served
