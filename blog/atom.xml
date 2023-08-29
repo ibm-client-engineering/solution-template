@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://ibm-client-engineering.github.io/solution-name/blog</id>
+    <title>IBM Client Engineering Blog</title>
+    <updated>2023-06-01T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://ibm-client-engineering.github.io/solution-name/blog"/>
+    <subtitle>IBM Client Engineering Blog</subtitle>
+    <icon>https://ibm-client-engineering.github.io/solution-name/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Log - Sprint 1 🛫]]></title>
+        <id>https://ibm-client-engineering.github.io/solution-name/blog/flight-log-4</id>
+        <link href="https://ibm-client-engineering.github.io/solution-name/blog/flight-log-4"/>
+        <updated>2023-06-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
+        <category label="log" term="log"/>
+        <category label="sprint" term="sprint"/>
+    </entry>
+</feed>
