@@ -26,7 +26,6 @@ jobs:
           gh auth login -p https -h ${{ env.ENTERPRISE_URL }} --with-token < /tmp/token.txt
           gh repo create --public ${{ github.repository }}
   sync:
-    needs: verify
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo and all branches to stage
