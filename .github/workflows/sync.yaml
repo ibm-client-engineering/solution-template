@@ -1,5 +1,4 @@
 name: Sync with GitHub Enterprise
-
 env:
   GITHUB_TOKEN: ${{ secrets.GH_ENTERPRISE_TOKEN }}
   GHE_USER: ${{ vars.SYNC_USER }}
@@ -14,7 +13,20 @@ on:
       - '*'
       
 jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if remote enterprise repo exists
+        id: repocheck
+        run: git ls-remote https://${{ env.GHE_USER }}:${{ env.GITHUB_TOKEN }}@${{ env.ENTERPRISE_URL }}/${{ github.repository }} -q --exit-code
+      - name: Create remote repo
+        if: ${{ failure() && steps.repocheck.conclusion == 'failure' }}
+        run: |
+          echo ${{ env.GITHUB_TOKEN }} > /tmp/token.txt
+          gh auth login -p https -h ${{ env.ENTERPRISE_URL }} --with-token < /tmp/token.txt
+          gh repo create --public ${{ github.repository }}
   sync:
+    needs: verify
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo and all branches to stage
