@@ -36,7 +36,7 @@ jobs:
           fetch-depth: 0
 
       - name: Push the repo up to our internal github
-        if: ${{ github.repository != env.DEFAULT_TEMPLATE }}
+#        if: ${{ github.repository != env.DEFAULT_TEMPLATE }}
         uses: yesolutions/mirror-action@master
         with:
           REMOTE: 'https://${{ env.ENTERPRISE_URL }}/${{ github.repository }}'
