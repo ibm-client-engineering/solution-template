@@ -54,11 +54,11 @@ jobs:
         run: |
           echo ${{ env.GITHUB_TOKEN }} > /tmp/token.txt
           gh auth login -p https -h ${{ env.ENTERPRISE_URL }} --with-token < /tmp/token.txt
-          dnf -y install ruby
+          apt-get -y install ruby
           gem install travis --no-document
           travis login --api-endpoint ${{ env.TRAVIS_API_ENDPOINT }} --no-interactive -g ${{ env.CEBOT_GH_TRAVIS_TOKEN }}
           travis env set -r ${{ github.repository }} ORG ibm-client-engineering
-          travis env set -r ${{ github.repository }} REPO $(cat ${{ github.repository }} | awk -F/ '{print $2}') 
+          travis env set -r ${{ github.repository }} REPO $(echo "${{ github.repository }}" | awk -F/ '{print $2}') 
           travis env set -r ${{ github.repository }} GITHUB_TOKEN ${{ env.CEBOT_GH_TRAVIS_TOKEN }}
           travis env set -r ${{ github.repository }} PAGES_URL ${{ env.ENTERPRISE_PAGES_URL }}
         
