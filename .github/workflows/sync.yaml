@@ -9,6 +9,7 @@ env:
   COMMIT_MESSAGE: Pushing updates from Public to Enterprise
   COMMIT_AUTHOR: Friendly Neighborhood CEBOT
   CEBOT_GH_TRAVIS_TOKEN: ${{ secrets.CEBOT_GH_TRAVIS_TOKEN }}
+  CEBOT_TRAVIS_API_KEY: ${{ secrets.CEBOT_TRAVIS_API_KEY }}
   TRAVIS_API_ENDPOINT: ${{ vars.TRAVIS_API_ENDPOINT }}
   ENTERPRISE_PAGES_URL: ${{ vars.ENTERPRISE_PAGES_URL }}
 
