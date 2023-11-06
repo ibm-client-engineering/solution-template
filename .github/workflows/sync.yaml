@@ -54,7 +54,6 @@ jobs:
         run: |
           echo ${{ env.GITHUB_TOKEN }} > /tmp/token.txt
           gh auth login -p https -h ${{ env.ENTERPRISE_URL }} --with-token < /tmp/token.txt
-          gh repo create --public ${{ github.repository }}
           dnf -y install ruby
           gem install travis --no-document
           travis login --api-endpoint ${{ env.TRAVIS_API_ENDPOINT }} --no-interactive -g ${{ env.CEBOT_GH_TRAVIS_TOKEN }}
