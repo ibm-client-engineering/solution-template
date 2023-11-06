@@ -1,0 +1,35 @@
+language: ruby
+
+branches:
+  only:
+  - main
+
+#env:
+#  - IMAGE_TAG=latest IMAGE_NAME=angel-watson-assistant-demo IBM_REGISTRY_NAMESPACE=watson-assistant
+
+#services:
+#  - docker
+
+jobs:
+  include:
+    - stage: build and deploy pages
+      before_install:
+        - bash update_docusaurus.sh $ORG $REPO $PAGES_URL
+      install:
+        - yarn upgrade
+#        - yarn install --frozen-lockfile
+        - yarn install
+      script:
+        - yarn build
+      deploy:
+      - provider: pages
+        github_url: github.ibm.com
+        github_token: $GITHUB_TOKEN
+        target_branch: gh-pages
+        skip_cleanup: true
+        local_dir: build
+        on:
+          branch: main
+
+stages:
+  - build and deploy pages

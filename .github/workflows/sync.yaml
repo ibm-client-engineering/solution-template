@@ -60,14 +60,30 @@ jobs:
         env:
           REPO_NAME: ${{ steps.repo_name.outputs.REPO_NAME }}
         run: |
-          echo ${{ env.GITHUB_TOKEN }} > /tmp/token.txt
-          gh auth login -p https -h ${{ env.ENTERPRISE_URL }} --with-token < /tmp/token.txt
-          sudo gem install travis --no-document
-          travis login --api-endpoint ${{ env.TRAVIS_API_ENDPOINT }} --no-interactive -g ${{ env.CEBOT_GH_TRAVIS_TOKEN }}
-          travis env set -r ${{ github.repository }} ORG ${{ github.repository_owner }}
-          travis env set -r ${{ github.repository }} REPO ${{ env.REPO_NAME }}
-          travis env set -r ${{ github.repository }} GITHUB_TOKEN ${{ env.CEBOT_GH_TRAVIS_TOKEN }}
-          travis env set -r ${{ github.repository }} PAGES_URL ${{ env.ENTERPRISE_PAGES_URL }}
+          curl -X POST \
+          -H "Content-Type: application/json" \
+          -H "Travis-API-Version: 3" \
+          -H "Authorization: token ${{ env.CEBOT_TRAVIS_API_KEY }}" \
+          -d '{ "env_var.name": "ORG", "env_var.value": "${{ github.repository_owner }}", "env_var.public": true }' \
+          ${{ env.TRAVIS_API_ENDPOINT }}/repo/${{ github.repository_owner }}%2F${{ env.REPO_NAME }}/env_vars
+          curl -X POST \
+          -H "Content-Type: application/json" \
+          -H "Travis-API-Version: 3" \
+          -H "Authorization: token ${{ env.CEBOT_TRAVIS_API_KEY }}" \
+          -d '{ "env_var.name": "REPO", "env_var.value": "${{ env.REPO_NAME }}", "env_var.public": true }' \
+          ${{ env.TRAVIS_API_ENDPOINT }}/repo/${{ github.repository_owner }}%2F${{ env.REPO_NAME }}/env_vars
+          curl -X POST \
+          -H "Content-Type: application/json" \
+          -H "Travis-API-Version: 3" \
+          -H "Authorization: token ${{ env.CEBOT_TRAVIS_API_KEY }}" \
+          -d '{ "env_var.name": "GITHUB_TOKEN", "env_var.value": "${{ env.CEBOT_GH_TRAVIS_TOKEN }}", "env_var.public": false }' \
+          ${{ env.TRAVIS_API_ENDPOINT }}/repo/${{ github.repository_owner }}%2F${{ env.REPO_NAME }}/env_vars
+          curl -X POST \
+          -H "Content-Type: application/json" \
+          -H "Travis-API-Version: 3" \
+          -H "Authorization: token ${{ env.CEBOT_TRAVIS_API_KEY }}" \
+          -d '{ "env_var.name": "PAGES_URL", "env_var.value": "${{ env.ENTERPRISE_PAGES_URL }}", "env_var.public": true }' \
+          ${{ env.TRAVIS_API_ENDPOINT }}/repo/${{ github.repository_owner }}%2F${{ env.REPO_NAME }}/env_vars
         
 
 #  update:
