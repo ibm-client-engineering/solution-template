@@ -48,17 +48,23 @@ jobs:
           GIT_USERNAME: ${{ env.GHE_USER }}
           GIT_PASSWORD: ${{ env.GITHUB_TOKEN }}
       
+      - name: Set repo name as an env var
+        id: repo_name
+        run: |
+          echo ${{ github.repository }}| awk -F/ '{print "REPO_NAME="$2}' >> "$GITHUB_OUTPUT"
+      
       - name: Set Travis Vars
         id: travis
         if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
+        env:
+          REPO_NAME: ${{ steps.repo_name.outputs.REPO_NAME }}
         run: |
           echo ${{ env.GITHUB_TOKEN }} > /tmp/token.txt
           gh auth login -p https -h ${{ env.ENTERPRISE_URL }} --with-token < /tmp/token.txt
-          sudo apt-get -y install ruby
           sudo gem install travis --no-document
           travis login --api-endpoint ${{ env.TRAVIS_API_ENDPOINT }} --no-interactive -g ${{ env.CEBOT_GH_TRAVIS_TOKEN }}
-          travis env set -r ${{ github.repository }} ORG ibm-client-engineering
-          travis env set -r ${{ github.repository }} REPO $(echo "${{ github.repository }}" | awk -F/ '{print $2}') 
+          travis env set -r ${{ github.repository }} ORG ${{ github.repository_owner }}
+          travis env set -r ${{ github.repository }} REPO ${{ env.REPO_NAME }}
           travis env set -r ${{ github.repository }} GITHUB_TOKEN ${{ env.CEBOT_GH_TRAVIS_TOKEN }}
           travis env set -r ${{ github.repository }} PAGES_URL ${{ env.ENTERPRISE_PAGES_URL }}
         
