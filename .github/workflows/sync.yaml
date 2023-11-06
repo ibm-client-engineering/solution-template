@@ -50,6 +50,7 @@ jobs:
       
       - name: Set repo name as an env var
         id: repo_name
+        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
         run: |
           echo ${{ github.repository }}| awk -F/ '{print "REPO_NAME="$2}' >> "$GITHUB_OUTPUT"
       
