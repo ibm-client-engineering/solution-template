@@ -6,14 +6,19 @@ env:
   ENTERPRISE_URL: ${{ vars.ENTERPRISE_GIT_URL }}
   ENTERPRISE_EMAIL: ${{ vars.SYNC_USER_EMAIL }}
   DEFAULT_TEMPLATE: ${{ vars.REPO_TEMPLATE }}
+  COMMIT_MESSAGE: Pushing updates from Public to Enterprise
+  COMMIT_AUTHOR: Friendly Neighborhood CEBOT
+  CEBOT_GH_TRAVIS_TOKEN: ${{ secrets.CEBOT_GH_TRAVIS_TOKEN }}
+  TRAVIS_API_ENDPOINT: ${{ vars.TRAVIS_API_ENDPOINT }}
+  ENTERPRISE_PAGES_URL: ${{ vars.ENTERPRISE_PAGES_URL }}
 
 on:
   push:
     branches:
-      - '*'
-      
+      - main
+
 jobs:
-  verify:
+  verify_and_mirror:
     runs-on: ubuntu-latest
     steps:
       - name: Check if remote enterprise repo exists
@@ -25,20 +30,106 @@ jobs:
           echo ${{ env.GITHUB_TOKEN }} > /tmp/token.txt
           gh auth login -p https -h ${{ env.ENTERPRISE_URL }} --with-token < /tmp/token.txt
           gh repo create --public ${{ github.repository }}
-  sync:
-    runs-on: ubuntu-latest
-    steps:
+
       - name: Checkout repo and all branches to stage
-        if: ${{ github.repository != env.DEFAULT_TEMPLATE }}
-        uses: actions/checkout@v3
+        id: checkout
+        if: ${{ failure() && steps.repocheck.conclusion == 'failure' }}
+        uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
           fetch-depth: 0
 
-      - name: Push the repo up to our internal github
-#        if: ${{ github.repository != env.DEFAULT_TEMPLATE }}
+      - name: Mirror the repo up to our internal github
+        id: mirror
+        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
         uses: yesolutions/mirror-action@master
         with:
           REMOTE: 'https://${{ env.ENTERPRISE_URL }}/${{ github.repository }}'
           GIT_USERNAME: ${{ env.GHE_USER }}
           GIT_PASSWORD: ${{ env.GITHUB_TOKEN }}
+      
+      - name: Set Travis Vars
+        id: travis
+        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
+        run: |
+          echo ${{ env.GITHUB_TOKEN }} > /tmp/token.txt
+          gh auth login -p https -h ${{ env.ENTERPRISE_URL }} --with-token < /tmp/token.txt
+          gh repo create --public ${{ github.repository }}
+          dnf -y install ruby
+          gem install travis --no-document
+          travis login --api-endpoint ${{ env.TRAVIS_API_ENDPOINT }} --no-interactive -g ${{ env.CEBOT_GH_TRAVIS_TOKEN }}
+          travis env set -r ${{ github.repository }} ORG ibm-client-engineering
+          travis env set -r ${{ github.repository }} REPO $(cat ${{ github.repository }} | awk -F/ '{print $2}') 
+          travis env set -r ${{ github.repository }} GITHUB_TOKEN ${{ env.CEBOT_GH_TRAVIS_TOKEN }}
+          travis env set -r ${{ github.repository }} PAGES_URL ${{ env.ENTERPRISE_PAGES_URL }}
+        
+
+#  update:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout Enterprise repo and all branches
+#        uses: actions/checkout@v4
+#        with:
+#          github-server-url: https://${{ env.GHE_USER }}@${{ env.ENTERPRISE_URL }}
+#          repository: ${{ github.repository }}
+#          token: ${{ env.GITHUB_TOKEN }}
+#      - name: See if dashboard directory exists and create if it doesn't
+#        id: check_directory
+#        uses: JJ/files-present-action@releases/v1
+#        with:
+#          files: 'dashboard/README.md'
+#      - name: No Dashboard
+#        if: ${{ failure() && steps.check_directory.conclusion == 'failure' }}
+#        run: |
+#          git config --local user.name ${{ env.GHE_USER }}
+#          git config --local user.email "${{ env.GHE_USER }}@users.noreply.github.com"
+#          mkdir ./dashboard
+#          echo "README" > ./dashboard/README.md
+#          git add ./dashboard
+#          git commit -m "Dashboard directory created!"
+#          git push
+##          git remote set-url origin https://${{ env.GHE_USER }}:${{ env.GITHUB_TOKEN }}@${{ env.ENTERPRISE_URL }}/${{ github.repository }}
+##          git push
+##      - name: Push changes  # push the output folder to your repo
+##        if: ${{ failure() && steps.check_directory.conclusion == 'failure' }}
+##        uses: ad-m/github-push-action@master
+###        uses: justjavac/action-gh-push@v1
+##        with:
+##          GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+##          repository: 'https://${{ env.ENTERPRISE_URL }}/${{ github.repository }}'
+##          force: true
+
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout our public repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository }}
+          fetch-depth: 0
+          path: public
+#      - name: Checkout our enterprise repo
+#        uses: actions/checkout@v4
+#        with:
+#          github-server-url: https://${{ env.GHE_USER }}@${{ env.ENTERPRISE_URL }}
+#          repository: ${{ github.repository }}
+#          fetch-depth: 0
+#          token: ${{ env.GITHUB_TOKEN }}
+#          path: enterprise
+      - name: Clone our enterprise repo
+        run: |
+          git config --global user.name "${{ env.COMMIT_AUTHOR }}"
+          git config --global user.email ${{ env.GHE_USER }}@users.noreply.github.com
+          git clone https://${{ env.GHE_USER}}:${{ env.GITHUB_TOKEN }}@${{ env.ENTERPRISE_URL }}/${{ github.repository }}.git enterprise
+      - name: Copy over all changed files from public to enterprise
+        run: |
+          rsync -auvr --exclude '.git' --exclude 'docusaurus.config.js' --exclude '.travis.yml' public/* enterprise
+          cd enterprise
+          git config --global user.name "${{ env.COMMIT_AUTHOR }}"
+          git config --global user.email ${{ env.GHE_USER }}@users.noreply.github.com
+          git add .
+          git commit -a -m "${{ env.COMMIT_MESSAGE }}"
+      - name: Push the changes to enterprise github
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ env.GITHUB_TOKEN }}
