@@ -1,0 +1,25 @@
+name: Create Slack Channel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-slack-channel:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Create Slack Channel
+        run: |
+          SLACK_TOKEN=$SLACK_TOKEN
+          CHANNEL_NAME=my-new-channel
+          curl -X POST -H "Authorization: Bearer $SLACK_TOKEN" -H "Content-type: application/json" \
+            --data '{"name":"'"$CHANNEL_NAME"'"}' \
+            https://slack.com/api/conversations.create
+        env:
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+
