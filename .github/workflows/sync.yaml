@@ -34,7 +34,7 @@ jobs:
 
       - name: Checkout repo and all branches to stage
         id: checkout
-        if: ${{ failure() && steps.repocheck.conclusion == 'failure' }}
+#        if: ${{ failure() && steps.repocheck.conclusion == 'failure' }}
         uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
@@ -42,7 +42,7 @@ jobs:
 
       - name: Mirror the repo up to our internal github
         id: mirror
-        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
+#        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
         uses: yesolutions/mirror-action@master
         with:
           REMOTE: 'https://${{ env.ENTERPRISE_URL }}/${{ github.repository }}'
@@ -51,13 +51,13 @@ jobs:
       
       - name: Set repo name as an env var
         id: repo_name
-        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
+#        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
         run: |
           echo ${{ github.repository }}| awk -F/ '{print "REPO_NAME="$2}' >> "$GITHUB_OUTPUT"
       
       - name: Set Travis Vars
         id: travis
-        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
+#        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
         env:
           REPO_NAME: ${{ steps.repo_name.outputs.REPO_NAME }}
         run: |
@@ -122,37 +122,38 @@ jobs:
 ##          repository: 'https://${{ env.ENTERPRISE_URL }}/${{ github.repository }}'
 ##          force: true
 
-  sync:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout our public repo
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.repository }}
-          fetch-depth: 0
-          path: public
-#      - name: Checkout our enterprise repo
+#  sync:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout our public repo
 #        uses: actions/checkout@v4
 #        with:
-#          github-server-url: https://${{ env.GHE_USER }}@${{ env.ENTERPRISE_URL }}
 #          repository: ${{ github.repository }}
 #          fetch-depth: 0
-#          token: ${{ env.GITHUB_TOKEN }}
-#          path: enterprise
-      - name: Clone our enterprise repo
-        run: |
-          git config --global user.name "${{ env.COMMIT_AUTHOR }}"
-          git config --global user.email ${{ env.GHE_USER }}@users.noreply.github.com
-          git clone https://${{ env.GHE_USER}}:${{ env.GITHUB_TOKEN }}@${{ env.ENTERPRISE_URL }}/${{ github.repository }}.git enterprise
-      - name: Copy over all changed files from public to enterprise
-        run: |
-          rsync -auvr --exclude '.git' --exclude 'docusaurus.config.js' --exclude '.travis.yml' public/* enterprise
-          cd enterprise
-          git config --global user.name "${{ env.COMMIT_AUTHOR }}"
-          git config --global user.email ${{ env.GHE_USER }}@users.noreply.github.com
-          git add .
-          git commit -a -m "${{ env.COMMIT_MESSAGE }}"
-      - name: Push the changes to enterprise github
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ env.GITHUB_TOKEN }}
+#          path: public
+##      - name: Checkout our enterprise repo
+##        uses: actions/checkout@v4
+##        with:
+##          github-server-url: https://${{ env.GHE_USER }}@${{ env.ENTERPRISE_URL }}
+##          repository: ${{ github.repository }}
+##          fetch-depth: 0
+##          token: ${{ env.GITHUB_TOKEN }}
+##          path: enterprise
+#      - name: Clone our enterprise repo
+#        run: |
+#          git config --global user.name "${{ env.COMMIT_AUTHOR }}"
+#          git config --global user.email ${{ env.GHE_USER }}@users.noreply.github.com
+#          git clone https://${{ env.GHE_USER}}:${{ env.GITHUB_TOKEN }}@${{ env.ENTERPRISE_URL }}/${{ github.repository }}.git enterprise
+#      - name: Copy over all changed files from public to enterprise
+#        run: |
+#          rsync -auvr --exclude '.git' --exclude 'docusaurus.config.js' --exclude '.travis.yml' public/* enterprise
+#          cd enterprise
+#          git config --global user.name "${{ env.COMMIT_AUTHOR }}"
+#          git config --global user.email ${{ env.GHE_USER }}@users.noreply.github.com
+#          git add .
+#          git commit -a -m "${{ env.COMMIT_MESSAGE }}"
+#      - name: Push the changes to enterprise github
+#        uses: ad-m/github-push-action@master
+#        with:
+#          github_token: ${{ env.GITHUB_TOKEN }}
+#
