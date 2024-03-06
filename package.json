@@ -19,6 +19,7 @@
     "@carbon/grid": "^11.21.0",
     "@carbon/icons-react": "^11.32.0",
     "@carbon/motion": "^11.16.0",
+    "@carbon/react": "^1.52.0",
     "@carbon/type": "^11.25.0",
     "@cmfcmf/docusaurus-search-local": "^1.1.0",
     "@docusaurus/core": "^3.1.0",
