@@ -14,7 +14,7 @@ async function createconfig() {
       mermaid: true,
     },
     themes: ["@docusaurus/theme-mermaid", "@docusaurus/theme-live-codeblock"],
-    title: "IBM Client Engineering",
+    title: "Insert Solution Name",
     tagline: "Build Faster. Together.",
     favicon: "img/favicon.ico",
 
@@ -22,13 +22,13 @@ async function createconfig() {
     url: "https://ibm-client-engineering.github.io",
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often "/<projectName>/"
-    baseUrl: "/solution-name/",
+    baseUrl: "/insert-solution-name",
 
 
     // GitHub pages deployment config.
     // If you aren"t using GitHub pages, you don"t need these.
     organizationName: "ibm-client-engineering", // Usually your GitHub org/user name.
-    projectName: "solution-name", // Usually your repo name.
+    projectName: "insert-solution-name", // Usually your repo name.
 
     onBrokenLinks: "throw",
     onBrokenMarkdownLinks: "warn",
@@ -79,21 +79,23 @@ async function createconfig() {
             // Please change this to your repo.
             // Remove this to remove the "edit this page" links.
             editUrl:
-              "https://github.com/ibm-client-engineering/solution-name/tree/main/packages/create-docusaurus/templates/shared/",
+              "https://github.com/ibm-client-engineering/insert-solution-name/tree/main/packages/create-docusaurus/templates/shared/",
           },
           theme: {
-            customCss: require.resolve("./src/styles.css"),
+            customCss: require.resolve("./src/css/styles.css"),
           },
           blog: {
-            path: "flight-logs",
+            routeBasePath: "flight-logs",
+            path: './flight-logs',
             // Simple use-case: string editUrl
             // editUrl: "https://github.com/facebook/docusaurus/edit/main/website/",
             // Advanced use-case: functional editUrl
             editUrl: ({ locale, blogDirPath, blogPath, permalink }) =>
-              "https://github.com/ibm-client-engineering/solution-name/edit/main/${blogDirPath}/${blogPath}",
-            blogTitle: "Journey Log",
-            blogSidebarTitle: "All our logs",
-            postsPerPage: 10,
+              "https://github.com/ibm-client-engineering/insert-solution-name/edit/main/${blogDirPath}/${blogPath}",
+            blogTitle: "Flight Logs",
+            blogSidebarTitle: "Flight Logs",
+            blogSidebarCount: 'ALL',
+            postsPerPage: 'ALL',
             remarkPlugins: [],
             rehypePlugins: [],
           }
@@ -104,7 +106,7 @@ async function createconfig() {
     themeConfig:
       /** @type {import("@docusaurus/preset-classic").ThemeConfig} */
       ({
-        metadata: [{ name: "keywords", content: "ibm client engineering, open solutions library,  filenet, eks, aws, cp4ba, filenet on aws eks" }],
+        metadata: [{ name: "keywords", content: "ibm client engineering, open solutions library" }],
         mermaid: {
           theme: { light: "neutral", dark: "dark" },
         },
@@ -113,6 +115,9 @@ async function createconfig() {
         tableOfContents: {
           minHeadingLevel: 2,
           maxHeadingLevel: 5,
+        },
+        colorMode: {
+          disableSwitch: true,
         },
         zoom: {
           selector: ".markdown :not(a) > img",
@@ -125,9 +130,9 @@ async function createconfig() {
           },
         },
         navbar: {
-          title: "| IBM Solution Document",
+          title: "| Insert Solution Name",
           logo: {
-            alt: "My Site Logo",
+            alt: "IBM Client Engineering Logo",
             src: "img/logo.svg",
             srcDark: "img/logo-dark.svg",
             width: 200,
@@ -140,10 +145,9 @@ async function createconfig() {
             //   position: "left",
             //   label: "Section",
             // },
-            {to: "/", label: "Flight Path", position: "right"},
-            {to: "blog", label: "Flight Logs", position: "right"},
+            {to: "flight-logs", label: "Flight Logs", position: "right"},
             {
-              href: "https://github.com/ibm-client-engineering/solution-name",
+              href: "https://github.com/ibm-client-engineering/insert-solution-name",
               className: "header-github-link",
               position: "right",
             },
@@ -152,10 +156,10 @@ async function createconfig() {
         footer: {
           logo: {
               alt: "IBM Logo",
-              src: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+              src: "https://www.ibm.com/brand/experience-guides/developer/8f4e3cc2b5d52354a6d43c8edba1e3c9/02_8-bar-reverse.svg",
               href: "https://ibm.com",
               height: 150,
-              width: 150,
+              width: 200,
 
           },
           // style: "dark",
@@ -168,8 +172,12 @@ async function createconfig() {
                   to: "https://www.ibm.com/",
                 },
                 {
-                  label: "IBM Client Engineering - Open Solutions Library",
+                  label: "IBM Client Engineering",
                   to: "https://www.ibm.com/client-engineering",
+                },
+                {
+                  label: "IBM Client Engineering Solutions Hub",
+                  to: "https://github.com/ibm-client-engineering",
                 },
               ],
 
