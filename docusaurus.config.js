@@ -82,7 +82,7 @@ async function createconfig() {
               "https://github.com/ibm-client-engineering/insert-solution-name/tree/main/packages/create-docusaurus/templates/shared/",
           },
           theme: {
-            customCss: require.resolve("./src/css/styles.css"),
+            customCss: require.resolve("./src/css/custom.css"),
           },
           blog: {
             routeBasePath: "flight-logs",
