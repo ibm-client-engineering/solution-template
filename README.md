@@ -25,6 +25,8 @@ This is a template used to quickly and effectively document assets and solutions
    Navigate into your directory with `cd solution-name`.
 
    Run `yarn install` or `npm install`  to get everything set up.
+
+   **Note**: if there are dependency tree issues during the install, run `npm install --legacy-peer-deps` and then run the install command again.
     
    Run the site locally with `yarn run start` or `npm run start`.
 
