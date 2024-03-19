@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Insert Solution Name Blog</title>
+        <link>https://ibm-client-engineering.github.io/insert-solution-name/flight-logs</link>
+        <description>Insert Solution Name Blog</description>
+        <lastBuildDate>Fri, 01 Mar 2024 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[Sample Flight Log 🛫]]></title>
+            <link>https://ibm-client-engineering.github.io/insert-solution-name/flight-logs/sample-flight-log</link>
+            <guid>https://ibm-client-engineering.github.io/insert-solution-name/flight-logs/sample-flight-log</guid>
+            <pubDate>Fri, 01 Mar 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flight Log of Co-Creation Activities]]></description>
+            <category>log</category>
+            <category>sprint</category>
+        </item>
+    </channel>
+</rss>

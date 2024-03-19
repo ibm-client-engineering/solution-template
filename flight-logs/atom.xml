@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://ibm-client-engineering.github.io/insert-solution-name/flight-logs</id>
+    <title>Insert Solution Name Blog</title>
+    <updated>2024-03-01T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://ibm-client-engineering.github.io/insert-solution-name/flight-logs"/>
+    <subtitle>Insert Solution Name Blog</subtitle>
+    <icon>https://ibm-client-engineering.github.io/insert-solution-name/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Sample Flight Log 🛫]]></title>
+        <id>https://ibm-client-engineering.github.io/insert-solution-name/flight-logs/sample-flight-log</id>
+        <link href="https://ibm-client-engineering.github.io/insert-solution-name/flight-logs/sample-flight-log"/>
+        <updated>2024-03-01T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Flight Log of Co-Creation Activities]]></summary>
+        <category label="log" term="log"/>
+        <category label="sprint" term="sprint"/>
+    </entry>
+</feed>
