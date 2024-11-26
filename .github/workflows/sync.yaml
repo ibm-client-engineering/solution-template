@@ -32,22 +32,22 @@ jobs:
           gh auth login -p https -h ${{ env.ENTERPRISE_URL }} --with-token < /tmp/token.txt
           gh repo create --public ${{ github.repository }}
 
-      - name: Checkout repo and all branches to stage
-        id: checkout
-#        if: ${{ failure() && steps.repocheck.conclusion == 'failure' }}
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ github.repository }}
-          fetch-depth: 0
+#      - name: Checkout repo and all branches to stage
+#        id: checkout
+##        if: ${{ failure() && steps.repocheck.conclusion == 'failure' }}
+#        uses: actions/checkout@v4
+#        with:
+#          repository: ${{ github.repository }}
+#          fetch-depth: 0
 
-      - name: Mirror the repo up to our internal github
-        id: mirror
-#        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
-        uses: yesolutions/mirror-action@master
-        with:
-          REMOTE: 'https://${{ env.ENTERPRISE_URL }}/${{ github.repository }}'
-          GIT_USERNAME: ${{ env.GHE_USER }}
-          GIT_PASSWORD: ${{ env.GITHUB_TOKEN }}
+#      - name: Mirror the repo up to our internal github
+#        id: mirror
+##        if: ${{ failure() && steps.check_directory.conclusion != 'failure' }}
+#        uses: yesolutions/mirror-action@master
+#        with:
+#          REMOTE: 'https://${{ env.ENTERPRISE_URL }}/${{ github.repository }}'
+#          GIT_USERNAME: ${{ env.GHE_USER }}
+#          GIT_PASSWORD: ${{ env.GITHUB_TOKEN }}
       
       - name: Set repo name as an env var
         id: repo_name
